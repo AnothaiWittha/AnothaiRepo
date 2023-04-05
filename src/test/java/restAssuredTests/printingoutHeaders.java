@@ -1,0 +1,39 @@
+package restAssuredTests;
+
+import org.junit.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.http.Header;
+import io.restassured.http.Headers;
+import io.restassured.http.Method;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+public class printingoutHeaders {
+
+	@Test
+	public void testingHeaders() {
+	//set the base URL
+			RestAssured.baseURI ="https://reqres.in/api/users?page=2";
+			
+			//create request object
+			RequestSpecification httpRequest = RestAssured.given();
+			
+			//response object
+			//import io.restassured.response.Response;
+			Response myResponse = httpRequest.request(Method.GET);
+			
+			//to print a single header
+			System.out.println(myResponse.getHeader("Content-Type"));
+
+			//to print all headers
+			Headers allHeaders = myResponse.getHeaders();
+			
+			for (Header eachHeader: allHeaders ) {
+				System.out.println(eachHeader.getName() + "------>>" + eachHeader.getValue());
+				
+			}
+	
+	
+	}
+}
